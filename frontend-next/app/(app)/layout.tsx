@@ -2,16 +2,91 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import type { ReactNode } from "react";
-import { UserButton, useUser } from "@clerk/nextjs";
+import { useState, type ReactNode } from "react";
+import { useClerk, useUser } from "@clerk/nextjs";
 import { clerkEnabled } from "@/lib/clerkConfig";
 import { ClerkSetupNotice } from "@/components/AuthShell";
 import Logo from "@/components/Logo";
 
+/** Avatar-only user menu: Profile / Manage account / Settings / Sign out. */
+function UserMenu() {
+  const { user, isSignedIn } = useUser();
+  const { openUserProfile, signOut } = useClerk();
+  const [open, setOpen] = useState(false);
+
+  if (!isSignedIn) return null;
+
+  const initials = (user?.fullName || user?.primaryEmailAddress?.emailAddress || "U")
+    .split(" ")
+    .map((w) => w[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+
+  const itemCls =
+    "flex w-full items-center gap-2.5 rounded-sm px-3 py-2 text-left text-[0.78rem] font-light text-fg2 transition hover:bg-white/[0.04] hover:text-fg";
+
+  return (
+    <div className="relative">
+      <button
+        onClick={() => setOpen((v) => !v)}
+        aria-label="Account menu"
+        className="grid size-8 place-items-center overflow-hidden rounded-full bg-ink2 ring-1 ring-white/15 transition hover:ring-ember/50"
+      >
+        {user?.imageUrl ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={user.imageUrl} alt="" className="size-full object-cover" />
+        ) : (
+          <span className="font-mono text-[0.6rem] font-semibold text-ember-bright">{initials}</span>
+        )}
+      </button>
+
+      {open && (
+        <>
+          <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
+          <div className="absolute right-0 top-full z-50 mt-2 w-56 rounded-md border border-line2 bg-surface p-1.5 shadow-2xl shadow-black/60">
+            <div className="mb-1 border-b border-line px-3 py-2">
+              <p className="truncate text-[0.78rem] font-semibold text-fg">
+                {user?.fullName || "Account"}
+              </p>
+              <p className="truncate font-mono text-[0.58rem] text-fg3">
+                {user?.primaryEmailAddress?.emailAddress}
+              </p>
+            </div>
+            <button
+              className={itemCls}
+              onClick={() => {
+                setOpen(false);
+                openUserProfile();
+              }}
+            >
+              Profile
+            </button>
+            <button
+              className={itemCls}
+              onClick={() => {
+                setOpen(false);
+                openUserProfile();
+              }}
+            >
+              Manage account
+            </button>
+            <Link href="/settings" className={itemCls} onClick={() => setOpen(false)}>
+              Settings
+            </Link>
+            <div className="my-1 border-t border-line" />
+            <button className={itemCls} onClick={() => void signOut()}>
+              Sign out
+            </button>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
 function AppNav({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  const { user, isSignedIn } = useUser();
-  const email = user?.primaryEmailAddress?.emailAddress;
 
   const navLink = (href: string, label: string) => {
     const active = pathname === href || (href !== "/dashboard" && pathname.startsWith(href));
@@ -38,20 +113,8 @@ function AppNav({ children }: { children: ReactNode }) {
 
           <nav className="flex items-center gap-1">
             {navLink("/dashboard", "projects")}
-            {navLink("/settings", "settings")}
             <div className="mx-3 h-5 w-px bg-line2" />
-            <span className="hidden max-w-48 truncate font-mono text-[0.62rem] text-fg3 lg:inline" title={email}>
-              {email}
-            </span>
-            {isSignedIn && (
-              <UserButton
-                appearance={{
-                  elements: {
-                    avatarBox: "ring-1 ring-white/15",
-                  },
-                }}
-              />
-            )}
+            <UserMenu />
           </nav>
         </div>
       </header>

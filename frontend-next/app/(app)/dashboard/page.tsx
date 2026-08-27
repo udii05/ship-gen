@@ -61,15 +61,14 @@ export default function DashboardPage() {
     <div>
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <div className="sec-label !mb-2">// your products</div>
           <h1 className="heading-lux text-4xl sm:text-5xl">
             Your <em>projects</em>
           </h1>
           <p className="mt-4 font-mono text-[0.65rem] leading-relaxed text-fg3">
-            each project runs planner → researcher → architect → builder → qa, gated by your approvals
+            make your product and ship it instantly
           </p>
         </div>
-        <button onClick={() => setModalOpen(true)} className="btn btn-primary">
+        <button onClick={() => setModalOpen(true)} className="btn-hero btn-hero-primary">
           <Plus className="size-4" />
           new product
         </button>
@@ -86,18 +85,24 @@ export default function DashboardPage() {
           <Spinner className="size-6" />
         </div>
       ) : projects.length === 0 ? (
-        <div className="mt-14 rounded-md border border-dashed border-line2 bg-surface/50 px-6 py-16 text-center">
-          <div className="mx-auto grid size-12 place-items-center rounded border border-line2 bg-ink2 text-ember">
-            <Folder className="size-5" />
+        <div className="relative mt-14 overflow-hidden rounded-md border border-line bg-surface px-6 py-20 text-center">
+          <div className="ember-glow -top-40 left-1/2 -translate-x-1/2" />
+          <div className="relative z-10">
+            <div className="mx-auto grid size-14 place-items-center rounded-full border border-ember/30 bg-ember-dim text-ember shadow-[0_0_24px_rgba(35,169,242,0.15)]">
+              <Folder className="size-6" />
+            </div>
+            <h2 className="heading-lux mt-6 text-2xl sm:text-3xl">
+              No products <em>yet</em>
+            </h2>
+            <p className="mx-auto mt-3 max-w-sm text-sm font-light leading-relaxed text-fg2">
+              describe a product and let the crew plan, design and build it — you stay in control
+              at every gate.
+            </p>
+            <button onClick={() => setModalOpen(true)} className="btn-hero btn-hero-primary mt-8">
+              <Plus className="size-4" />
+              create your first product
+            </button>
           </div>
-          <h2 className="mt-5 font-display text-base font-bold text-fg">No products yet</h2>
-          <p className="mx-auto mt-2 max-w-sm font-mono text-[0.68rem] leading-relaxed text-fg3">
-            describe a product and let the crew plan, design and build it — you stay in control at every gate.
-          </p>
-          <button onClick={() => setModalOpen(true)} className="btn btn-primary mt-7">
-            <Plus className="size-4" />
-            create your first product
-          </button>
         </div>
       ) : (
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
