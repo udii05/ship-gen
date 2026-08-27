@@ -3,11 +3,15 @@ import { NextResponse, type NextFetchEvent, type NextRequest } from "next/server
 
 const isPublicRoute = createRouteMatcher(["/", "/login(.*)", "/signup(.*)"]);
 
-const protect = clerkMiddleware(async (auth, req) => {
-  if (!isPublicRoute(req)) {
-    await auth.protect();
-  }
-});
+const protect = clerkMiddleware(
+  async (auth, req) => {
+    if (!isPublicRoute(req)) {
+      // Redirect to our /login route (not Clerk's default /sign-in) when unauthenticated
+      await auth.protect({ unauthenticatedUrl: "/login" });
+    }
+  },
+  { signInUrl: "/login", signUpUrl: "/signup" },
+);
 
 export default function middleware(req: NextRequest, event: NextFetchEvent) {
   // Until Clerk keys are configured, skip protection (auth pages show setup instructions).
