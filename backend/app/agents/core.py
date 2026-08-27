@@ -20,8 +20,10 @@ async def designer_agent(user: User, prd: str, competitive: str) -> str:
 
 
 async def builder_agent(user: User, design: str) -> str:
-    return await complete(BUILDER_SYSTEM, design, user=user)
+    text, _, _ = await complete(BUILDER_SYSTEM, design, user=user)
+    return text
 
 
 async def tester_agent(user: User, code_summary: str) -> str:
-    return await complete(TESTER_SYSTEM, code_summary, user=user)
+    text, _, _ = await complete(TESTER_SYSTEM, code_summary, user=user)
+    return text
