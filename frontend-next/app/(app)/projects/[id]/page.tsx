@@ -8,6 +8,7 @@ import type { Approval, Project, Run } from "@/lib/types";
 import Pipeline from "@/components/Pipeline";
 import Markdown from "@/components/Markdown";
 import StatusPill from "@/components/StatusPill";
+import ProductPanel from "@/components/ProductPanel";
 import {
   AlertTriangle,
   Check,
@@ -194,6 +195,7 @@ export default function ProjectDetailPage() {
   const deployDone = project.deploy_status === "done" && project.deploy_url;
   const canDeploy = Boolean(project.repo_path);
   const gateArtifact = pendingGate === "prd" ? project.prd : pendingGate === "design" ? project.design : "";
+  const isReady = project.status === "ready";
 
   return (
     <div>
@@ -303,8 +305,8 @@ export default function ProjectDetailPage() {
         </div>
       )}
 
-      {/* Main grid */}
-      <div className="mt-8 grid gap-6 lg:grid-cols-3">
+      {/* Main grid — when the product is ready, the right panel widens for the live preview */}
+      <div className={`mt-8 grid gap-6 ${isReady ? "lg:grid-cols-5" : "lg:grid-cols-3"}`}>
         {/* Left: pipeline + artifacts */}
         <div className="space-y-6 lg:col-span-2">
           <section className="card p-6">
@@ -357,7 +359,10 @@ export default function ProjectDetailPage() {
         </div>
 
         {/* Right rail */}
-        <div className="space-y-6">
+        <div className={`space-y-6 ${isReady ? "lg:col-span-3" : ""}`}>
+          {/* Live product panel (preview + revisions + download) */}
+          {isReady && <ProductPanel projectId={project.id} title={project.title} />}
+
           {/* Human gates */}
           <section className="card p-5">
             <h2 className="flex items-center gap-2 font-display text-sm font-bold text-fg">

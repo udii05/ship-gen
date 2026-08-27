@@ -2,6 +2,7 @@ from ..models import User
 from ..llm import complete
 from .prompts import (
     REQUIREMENT_SYSTEM, COMPETITOR_SYSTEM, DESIGNER_SYSTEM, BUILDER_SYSTEM, TESTER_SYSTEM,
+    REVISION_SYSTEM,
 )
 
 
@@ -26,4 +27,14 @@ async def builder_agent(user: User, design: str) -> str:
 
 async def tester_agent(user: User, code_summary: str) -> str:
     text, _, _ = await complete(TESTER_SYSTEM, code_summary, user=user)
+    return text
+
+
+async def revision_agent(user: User, current_html: str, instruction: str) -> str:
+    prompt = (
+        f"Current index.html:\n\n{current_html}\n\n"
+        f"Requested change: {instruction}\n\n"
+        "Return the complete updated index.html now."
+    )
+    text, _, _ = await complete(REVISION_SYSTEM, prompt, user=user)
     return text

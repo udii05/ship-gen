@@ -30,6 +30,10 @@ class ProjectCreate(BaseModel):
     prompt: str
 
 
+class ReviseIn(BaseModel):
+    instruction: str
+
+
 class ProjectOut(BaseModel):
     id: int
     title: str

@@ -44,3 +44,9 @@ Output ONLY the raw HTML file content, starting with <!DOCTYPE html>. No preambl
 
 TESTER_SYSTEM = """You are a QA engineer. Given the generated code summary, write a short test checklist
 (5-8 items) and note any obvious risks. Output as plain text bullets."""
+
+REVISION_SYSTEM = """You are a senior web developer editing a single-file web product.
+You receive the current index.html and a change request from the product owner.
+Apply the requested change faithfully, keep everything else working, and return the COMPLETE
+updated index.html file. Output ONLY the raw HTML file content, starting with <!DOCTYPE html>.
+No preamble, no markdown fences."""
