@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { createPortal } from "react-dom";
 import { useApi, ApiError } from "@/lib/api";
 import type { Project } from "@/lib/types";
 import { Spinner, XMark, Zap } from "./icons";
@@ -37,7 +38,10 @@ export default function NewProjectModal({
     }
   }
 
-  return (
+  // Portal to <body> so the modal escapes the app's stacking context
+  // (otherwise later siblings like the footer paint above it).
+  if (typeof document === "undefined") return null;
+  return createPortal(
     <div className="fixed inset-0 z-50 grid place-items-center bg-black/70 p-4 backdrop-blur-sm" onMouseDown={onClose}>
       <div
         className="w-full max-w-lg overflow-hidden rounded-md border border-line2 bg-surface shadow-2xl"
@@ -96,6 +100,7 @@ export default function NewProjectModal({
           </div>
         </form>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
