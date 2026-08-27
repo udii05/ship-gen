@@ -75,7 +75,7 @@ async def start_pipeline(project_id: int, background_tasks: BackgroundTasks,
 
 
 @router.post("/{project_id}/approve/{gate}")
-async def approve_gate(project_id: int, gate: str,
+async def approve_gate(project_id: int, gate: str, background_tasks: BackgroundTasks,
                        user: User = Depends(get_current_user),
                        db: Session = Depends(get_db)):
     p = db.get(Project, project_id)
