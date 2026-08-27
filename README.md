@@ -5,7 +5,7 @@
 <h1 align="center">ShipGen — Multi-Agent SDLC Pipeline</h1>
 
 <p align="center">
-  <strong>Live:</strong> <a href="https://ship-gen.vercel.app/">ship-gen.vercel.app</a>
+  <strong>Live Deployed Link:</strong> <a href="https://ship-gen.vercel.app/">ship-gen.vercel.app</a>
 </p>
 
 <p align="center">
