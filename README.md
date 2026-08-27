@@ -5,6 +5,10 @@
 <h1 align="center">ShipGen — Multi-Agent SDLC Pipeline</h1>
 
 <p align="center">
+  <strong>Live:</strong> <a href="https://ship-gen.vercel.app/">ship-gen.vercel.app</a>
+</p>
+
+<p align="center">
   <em>Describe a product. A crew of specialized AI agents plans, researches, designs, builds and QA-checks it — pausing at every gate for your approval.</em>
 </p>
 
