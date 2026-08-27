@@ -6,7 +6,7 @@ import { useApi, ApiError } from "@/lib/api";
 import type { Project } from "@/lib/types";
 import StatusPill from "@/components/StatusPill";
 import NewProjectModal from "@/components/NewProjectModal";
-import { ChevronRight, Clock, Folder, Plus, Spinner } from "@/components/icons";
+import { ChevronRight, Clock, Folder, Plus, Refresh, Spinner } from "@/components/icons";
 
 function formatDate(iso: string): string {
   if (!iso) return "";
@@ -75,8 +75,15 @@ export default function DashboardPage() {
       </div>
 
       {error && (
-        <div className="mt-6 rounded border border-danger/30 bg-danger/10 px-4 py-3 font-mono text-xs text-rose-200">
-          {error}
+        <div className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded border border-danger/30 bg-danger/10 px-4 py-3 font-mono text-xs text-rose-200">
+          <span>{error}</span>
+          <button
+            onClick={() => void load()}
+            className="btn btn-secondary shrink-0 !py-1.5 !text-[0.65rem]"
+          >
+            <Refresh className="size-3.5" />
+            retry
+          </button>
         </div>
       )}
 
