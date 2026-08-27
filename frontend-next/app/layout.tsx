@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
-import { Fraunces, Inter, JetBrains_Mono, Newsreader, Space_Grotesk } from "next/font/google";
+import { Fraunces, Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import { clerkEnabled } from "@/lib/clerkConfig";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const fraunces = Fraunces({ subsets: ["latin"], variable: "--font-fraunces" });
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains-mono" });
-const newsreader = Newsreader({ subsets: ["latin"], variable: "--font-newsreader" });
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   weight: ["500", "600", "700"],
@@ -22,7 +21,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const shell = (
-    <html lang="en" className={`${inter.variable} ${fraunces.variable} ${jetbrainsMono.variable} ${newsreader.variable} ${spaceGrotesk.variable}`}>
+    <html lang="en" className={`${inter.variable} ${fraunces.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable}`}>
       <body>{children}</body>
     </html>
   );

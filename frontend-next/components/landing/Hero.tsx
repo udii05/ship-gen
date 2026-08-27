@@ -17,7 +17,7 @@ export default function Hero() {
           <em className="block">a crew of agents</em>
         </h1>
 
-        <p className="font-news mt-7 max-w-xl text-center text-[1.12rem] font-light leading-[1.75] text-fg2">
+        <p className="mt-7 max-w-xl text-center text-[0.95rem] font-medium leading-[1.75] text-fg2">
           Describe the product you want. A crew of specialized agents{" "}
           <strong className="font-medium text-fg">plans, researches, designs and builds</strong> it —
           pausing at every gate for <strong className="font-medium text-fg">your approval</strong>.

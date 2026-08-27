@@ -41,7 +41,7 @@ export default function GatesSection() {
               This isn't an autopilot — it's a crew with a captain. The pipeline is built around{" "}
               <strong className="font-medium text-fg">hard gates</strong> that only you can open.
             </p>
-            <blockquote className="font-news mt-10 max-w-md text-[1.05rem] font-light italic leading-[1.8] text-fg2">
+            <blockquote className="mt-10 max-w-md text-[0.9rem] font-medium leading-[1.8] text-fg2">
               "ShipGen moves fast because it stops at the right places."
             </blockquote>
           </Reveal>
