@@ -88,7 +88,7 @@ export default function SettingsPage() {
             <input
               value={modelName}
               onChange={(e) => setModelName(e.target.value)}
-              placeholder={provider === "openai" ? "gpt-4o" : "gemini-2.5-flash"}
+              placeholder={provider === "openai" ? "gpt-4o" : "gemini-3.6-flash"}
               className="input mt-1.5"
             />
           </label>

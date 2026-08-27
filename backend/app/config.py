@@ -15,7 +15,7 @@ class Settings(BaseSettings):
     # Operator-provided Gemini key used as the system free tier.
     gemini_api_key: str = ""
     default_model_provider: str = "gemini"
-    default_model_name: str = "gemini-2.5-flash"
+    default_model_name: str = "gemini-3.6-flash"
 
     # --- Rate-limit safety (Gemini free tier ~15 RPM) ---
     llm_min_interval_seconds: float = 4.0

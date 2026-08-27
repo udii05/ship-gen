@@ -136,7 +136,7 @@ Open [http://localhost:3000](http://localhost:3000).
 | `jwt_secret` | Secret for legacy JWT auth | `change-me` |
 | `gemini_api_key` | Operator Gemini key (free tier) | — |
 | `default_model_provider` | `gemini` or `openai` | `gemini` |
-| `default_model_name` | Default model | `gemini-2.5-flash` |
+| `default_model_name` | Default model | `gemini-3.6-flash` |
 | `llm_min_interval_seconds` | Rate-limit safety (free tier ~15 RPM) | `4.0` |
 | `workspace_root` | Where generated projects live | `./workspace` |
 | `cors_origins` | Allowed frontend origins | `http://localhost:3000` |
