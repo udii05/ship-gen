@@ -65,6 +65,11 @@ async def start_pipeline(project_id: int, background_tasks: BackgroundTasks,
     p = db.get(Project, project_id)
     if not p or p.user_id != user.id:
         raise HTTPException(status_code=404, detail="Project not found")
+    # Invalidate stale runs from previous attempts so the retry starts clean.
+    db.query(AgentRun).filter(AgentRun.project_id == project_id,
+                              AgentRun.status.in_(["queued", "running"])).update(
+        {"status": "failed", "phase": "stale"}, synchronize_session=False)
+    db.commit()
     background_tasks.add_task(run_pipeline, project_id)
     return {"status": "started", "project_id": project_id}
 
