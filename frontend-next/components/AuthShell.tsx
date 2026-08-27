@@ -2,8 +2,17 @@
 
 import Link from "next/link";
 import type { ReactNode } from "react";
+import Logo from "./Logo";
 
-export function AuthShell({ children, label }: { children: ReactNode; label: string }) {
+export function AuthShell({
+  children,
+  title,
+  subtitle,
+}: {
+  children: ReactNode;
+  title: string;
+  subtitle?: string;
+}) {
   return (
     <div className="relative grid min-h-screen place-items-center overflow-hidden px-4 py-16">
       <div className="grid-bg" />
@@ -12,12 +21,19 @@ export function AuthShell({ children, label }: { children: ReactNode; label: str
       <div className="relative z-10 w-full max-w-md">
         <Link
           href="/"
-          className="mb-10 inline-flex items-center gap-2 font-mono text-[0.68rem] uppercase tracking-[0.16em] text-fg3 transition hover:text-ember-bright"
+          className="mb-8 inline-flex items-center gap-2 font-mono text-[0.68rem] uppercase tracking-[0.16em] text-fg3 transition hover:text-ember-bright"
         >
           ← back to ShipGen
         </Link>
 
-        <p className="mb-4 font-mono text-[0.62rem] tracking-[0.1em] text-fg3">{label}</p>
+        <div className="mb-8 flex flex-col items-center text-center">
+          <Logo markClass="size-9" />
+          <h1 className="heading-lux mt-6 text-3xl">{title}</h1>
+          {subtitle && (
+            <p className="mt-3 max-w-sm text-sm font-light leading-relaxed text-fg2">{subtitle}</p>
+          )}
+        </div>
+
         {children}
       </div>
     </div>

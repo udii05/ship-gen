@@ -8,14 +8,17 @@ export const metadata: Metadata = { title: "Sign in — ShipGen" };
 export default function LoginPage() {
   if (!clerkEnabled) {
     return (
-      <AuthShell label="// sign in">
+      <AuthShell title="Authentication" subtitle="Clerk keys are not configured yet.">
         <ClerkSetupNotice />
       </AuthShell>
     );
   }
 
   return (
-    <AuthShell label="// sign in">
+    <AuthShell
+      title="Welcome back"
+      subtitle="Sign in to your ShipGen account — your crew is waiting."
+    >
       <SignIn
         routing="path"
         path="/login"
