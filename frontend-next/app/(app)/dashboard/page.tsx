@@ -102,7 +102,7 @@ export default function DashboardPage() {
               No products <em>yet</em>
             </h2>
             <p className="mx-auto mt-3 max-w-sm text-sm font-light leading-relaxed text-fg2">
-              describe a product and let the crew plan, design and build it — you stay in control
+              describe a product and let the crew plan, design and build it while you stay in control
               at every gate.
             </p>
             <button onClick={() => setModalOpen(true)} className="btn-hero btn-hero-primary mt-8">
@@ -124,7 +124,7 @@ export default function DashboardPage() {
                 <StatusPill status={p.status === "ready" && p.deploy_status === "done" ? "deployed" : p.status} />
               </div>
               <p className="mt-2.5 line-clamp-2 flex-1 text-xs font-light leading-relaxed text-fg2">{p.prompt}</p>
-              <div className="mt-4 flex items-center justify-between border-t border-line pt-3 font-mono text-[0.6rem] text-fg3">
+              <div className="mt-4 flex items-center justify-between border-t border-line pt-3 font-mono text-[0.68rem] text-fg3">
                 <span className="flex items-center gap-1.5">
                   <Clock className="size-3" />
                   {formatDate(p.created_at)}

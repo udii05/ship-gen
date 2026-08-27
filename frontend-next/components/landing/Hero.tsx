@@ -19,7 +19,7 @@ export default function Hero() {
 
         <p className="mt-7 max-w-xl text-center text-[0.95rem] font-medium leading-[1.75] text-fg2">
           Describe the product you want. A crew of specialized agents{" "}
-          <strong className="font-medium text-fg">plans, researches, designs and builds</strong> it —
+          <strong className="font-medium text-fg">plans, researches, designs and builds</strong> it,
           pausing at every gate for <strong className="font-medium text-fg">your approval</strong>.
         </p>
 
@@ -32,7 +32,7 @@ export default function Hero() {
           </Link>
         </div>
 
-        <p className="mt-7 font-mono text-[0.62rem] uppercase tracking-[0.16em] text-fg3">
+        <p className="mt-8 font-mono text-[0.72rem] uppercase tracking-[0.16em] text-fg3">
           Free tier included · No credit card · Deploy in one click
         </p>
       </div>

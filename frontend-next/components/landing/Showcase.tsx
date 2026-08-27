@@ -14,7 +14,7 @@ export default function Showcase() {
             One brief in. <em>A full run on the line.</em>
           </h2>
           <p className="mt-5 max-w-md text-[0.78rem] font-bold leading-relaxed text-fg3">
-            every stage reports back with an artifact — and stops at your gates
+            every stage reports back with an artifact and stops at your gates
           </p>
         </Reveal>
 

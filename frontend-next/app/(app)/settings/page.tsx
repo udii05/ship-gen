@@ -64,14 +64,14 @@ export default function SettingsPage() {
           <Gear className="size-4 text-ember" />
           LLM provider
         </h2>
-        <p className="mt-1.5 font-mono text-[0.62rem] leading-relaxed text-fg3">
+        <p className="mt-1.5 font-mono text-[0.7rem] leading-relaxed text-fg3">
           by default the pipeline runs on the operator's shared Gemini key (free tier). connect your own key for
           higher rate limits or a different provider.
         </p>
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
           <label className="block">
-            <span className="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-fg2">provider</span>
+            <span className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-fg2">provider</span>
             <select
               value={provider}
               onChange={(e) => setProvider(e.target.value)}
@@ -84,7 +84,7 @@ export default function SettingsPage() {
           </label>
 
           <label className="block">
-            <span className="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-fg2">model name</span>
+            <span className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-fg2">model name</span>
             <input
               value={modelName}
               onChange={(e) => setModelName(e.target.value)}
@@ -95,7 +95,7 @@ export default function SettingsPage() {
         </div>
 
         <label className="mt-4 block">
-          <span className="flex items-center gap-1.5 font-mono text-[0.62rem] uppercase tracking-[0.16em] text-fg2">
+          <span className="flex items-center gap-1.5 font-mono text-[0.7rem] uppercase tracking-[0.16em] text-fg2">
             <Key className="size-3.5" /> api key
           </span>
           <input
@@ -108,7 +108,7 @@ export default function SettingsPage() {
           />
         </label>
 
-        <p className="mt-3 flex items-start gap-2 rounded border border-line bg-ink2 px-3 py-2.5 font-mono text-[0.58rem] leading-relaxed text-fg3">
+        <p className="mt-3 flex items-start gap-2 rounded border border-line bg-ink2 px-3 py-2.5 font-mono text-[0.65rem] leading-relaxed text-fg3">
           <ShieldCheck className="mt-0.5 size-3.5 shrink-0 text-mint" />
           keys are encrypted at rest (Fernet) and only used to call the model provider on your behalf
         </p>

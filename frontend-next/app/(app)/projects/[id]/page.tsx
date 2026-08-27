@@ -126,7 +126,7 @@ export default function ProjectDetailPage() {
     setNotice("");
     try {
       await api(`/projects/${projectId}/start`, { body: {} });
-      setNotice("Pipeline started — the Planner is drafting your PRD.");
+      setNotice("Pipeline started, the Planner is drafting your PRD.");
       await load();
     } catch (err) {
       setError(err instanceof ApiError ? err.message : "Failed to start pipeline.");
@@ -140,7 +140,7 @@ export default function ProjectDetailPage() {
     setNotice("");
     try {
       await api(`/projects/${projectId}/approve/${gate}`, { body: {} });
-      setNotice(`${gate.toUpperCase()} approved — pipeline resumed.`);
+      setNotice(`${gate.toUpperCase()} approved, pipeline resumed.`);
       await load();
     } catch (err) {
       setError(err instanceof ApiError ? err.message : "Failed to approve.");
@@ -160,7 +160,7 @@ export default function ProjectDetailPage() {
       await api(`/projects/${projectId}/deploy`, {
         body: { vercel_token: vercelToken.trim(), render_token: "" },
       });
-      setNotice("Deploy requested — this can take a minute.");
+      setNotice("Deploy requested, this can take a minute.");
       setVercelToken("");
       await load();
     } catch (err) {
@@ -210,7 +210,7 @@ export default function ProjectDetailPage() {
             </h1>
             <StatusPill status={project.status === "ready" && deployDone ? "deployed" : project.status} />
           </div>
-          <p className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[0.62rem] text-fg3">
+          <p className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[0.7rem] text-fg3">
             <span>created {formatDate(project.created_at)}</span>
             {project.current_phase && (
               <>
@@ -245,7 +245,7 @@ export default function ProjectDetailPage() {
 
       {/* Brief */}
       <div className="card mt-5 px-4 py-3">
-        <p className="font-mono text-[0.55rem] uppercase tracking-[0.2em] text-fg3">brief</p>
+        <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-fg3">brief</p>
         <p className="mt-1.5 text-sm font-light leading-relaxed text-fg2">{project.prompt}</p>
       </div>
 
@@ -275,8 +275,8 @@ export default function ProjectDetailPage() {
                 <h2 className="font-display text-sm font-bold text-[#c8e6ff]">
                   Human gate: approve the {pendingGate === "prd" ? "PRD" : "design"} to continue
                 </h2>
-                <p className="mt-1 max-w-xl font-mono text-[0.62rem] leading-relaxed text-[#a8d8ff]/70">
-                  the pipeline is paused — no more tokens are spent until you approve. review the{" "}
+                <p className="mt-1 max-w-xl font-mono text-[0.7rem] leading-relaxed text-[#a8d8ff]/70">
+                  the pipeline is paused, no more tokens are spent until you approve. review the{" "}
                   {pendingGate === "prd" ? "PRD" : "architecture & design"} below, then approve to resume.
                 </p>
               </div>
@@ -309,7 +309,7 @@ export default function ProjectDetailPage() {
                 Agent pipeline
               </h2>
               {run && (
-                <span className="flex items-center gap-2 font-mono text-[0.6rem] text-fg3">
+                <span className="flex items-center gap-2 font-mono text-[0.68rem] text-fg3">
                   run #{run.id} <StatusPill status={run.status} />
                 </span>
               )}
@@ -319,7 +319,7 @@ export default function ProjectDetailPage() {
             ) : (
               <div className="rounded border border-dashed border-line2 px-5 py-10 text-center">
                 <p className="text-sm text-fg2">This product hasn't entered the pipeline yet.</p>
-                <p className="mt-1.5 font-mono text-[0.62rem] text-fg3">
+                <p className="mt-1.5 font-mono text-[0.7rem] text-fg3">
                   hit <span className="text-ember-bright">start pipeline</span> and the planner will draft a PRD for
                   your review
                 </p>
@@ -359,7 +359,7 @@ export default function ProjectDetailPage() {
               <ShieldCheck className="size-4 text-mint" />
               Human gates
             </h2>
-            <p className="mt-1 font-mono text-[0.6rem] text-fg3">agents pause here until you approve</p>
+            <p className="mt-1 font-mono text-[0.68rem] text-fg3">agents pause here until you approve</p>
             <ul className="mt-4 space-y-2.5">
               {["prd", "design"].map((gate) => {
                 const a = approvals.find((x) => x.gate === gate);
@@ -402,16 +402,16 @@ export default function ProjectDetailPage() {
                   <span className="truncate">{project.deploy_url}</span>
                   <ExternalLink className="size-4 shrink-0" />
                 </a>
-                <p className="mt-2 font-mono text-[0.6rem] text-fg3">live on Vercel — redeploy anytime with a new token</p>
+                <p className="mt-2 font-mono text-[0.68rem] text-fg3">live on Vercel, redeploy anytime with a new token</p>
               </div>
             ) : !canDeploy ? (
-              <p className="mt-4 rounded border border-dashed border-line2 px-3 py-4 text-center font-mono text-[0.62rem] text-fg3">
+              <p className="mt-4 rounded border border-dashed border-line2 px-3 py-4 text-center font-mono text-[0.7rem] text-fg3">
                 run the pipeline to unlock deployment
               </p>
             ) : (
               <div className="mt-4">
                 <label className="block">
-                  <span className="flex items-center gap-1.5 font-mono text-[0.62rem] uppercase tracking-[0.16em] text-fg2">
+                  <span className="flex items-center gap-1.5 font-mono text-[0.7rem] uppercase tracking-[0.16em] text-fg2">
                     <Key className="size-3.5" /> vercel token
                   </span>
                   <input
@@ -438,8 +438,8 @@ export default function ProjectDetailPage() {
                     </>
                   )}
                 </button>
-                <p className="mt-2 font-mono text-[0.55rem] leading-relaxed text-fg3">
-                  uses your token only — never stored server-side beyond the deploy call
+                <p className="mt-2 font-mono text-[0.65rem] leading-relaxed text-fg3">
+                  uses your token only, never stored server-side beyond the deploy call
                 </p>
               </div>
             )}
@@ -452,10 +452,10 @@ export default function ProjectDetailPage() {
                 <Eye className="size-4 text-fg3" />
                 Workspace
               </h2>
-              <p className="mt-3 break-all rounded border border-line bg-black/30 px-3 py-2.5 font-mono text-[0.62rem] text-fg3">
+              <p className="mt-3 break-all rounded border border-line bg-black/30 px-3 py-2.5 font-mono text-[0.7rem] text-fg3">
                 {project.repo_path}
               </p>
-              <p className="mt-2 flex items-center gap-1.5 font-mono text-[0.55rem] text-fg3">
+              <p className="mt-2 flex items-center gap-1.5 font-mono text-[0.65rem] text-fg3">
                 <ChevronRight className="size-3" /> generated code lives in this directory on the server
               </p>
             </section>

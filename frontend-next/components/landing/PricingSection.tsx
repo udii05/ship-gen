@@ -61,7 +61,7 @@ export default function PricingSection() {
             Pay for the line, <em>not the tokens.</em>
           </h2>
           <p className="mt-5 max-w-md text-[0.78rem] font-bold leading-relaxed text-fg3">
-            bring your own model keys — we never mark up inference
+            bring your own model keys and we never mark up inference
           </p>
         </Reveal>
 
@@ -76,16 +76,16 @@ export default function PricingSection() {
                 }`}
               >
                 {t.highlight && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-ember px-3 py-1 font-mono text-[0.55rem] font-bold uppercase tracking-[0.14em] text-white">
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-ember px-3 py-1 font-mono text-[0.62rem] font-bold uppercase tracking-[0.14em] text-white">
                     most popular
                   </span>
                 )}
-                <span className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-fg3">
+                <span className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-fg3">
                   {t.name}
                 </span>
                 <div className="mt-4 flex items-baseline gap-1">
                   <span className="font-display text-4xl font-semibold text-fg">{t.price}</span>
-                  <span className="font-mono text-[0.65rem] text-fg3">{t.period}</span>
+                  <span className="font-mono text-[0.7rem] text-fg3">{t.period}</span>
                 </div>
                 <p className="mt-2 text-[0.8rem] font-light text-fg2">{t.tagline}</p>
 

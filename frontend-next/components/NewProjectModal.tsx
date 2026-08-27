@@ -48,7 +48,7 @@ export default function NewProjectModal({
             <span className="size-2.5 rounded-full bg-[#ff5f57]" />
             <span className="size-2.5 rounded-full bg-[#ffbd2e]" />
             <span className="size-2.5 rounded-full bg-[#28c840]" />
-            <span className="ml-2 font-mono text-[0.62rem] tracking-[0.1em] text-fg3">// new product</span>
+            <span className="ml-2 font-mono text-[0.7rem] tracking-[0.1em] text-fg3">// new product</span>
           </div>
           <button onClick={onClose} className="rounded p-1 text-fg3 transition hover:bg-white/5 hover:text-fg">
             <XMark className="size-4" />
@@ -57,12 +57,12 @@ export default function NewProjectModal({
 
         <form onSubmit={submit} className="p-6">
           <h2 className="font-display text-base font-bold text-fg">Feed the pipeline</h2>
-          <p className="mt-1 font-mono text-[0.62rem] leading-relaxed text-fg3">
-            describe the product — the crew takes it from there, you approve every gate
+          <p className="mt-1 font-mono text-[0.7rem] leading-relaxed text-fg3">
+            describe the product and the crew takes it from there, you approve every gate
           </p>
 
           <label className="mt-5 block">
-            <span className="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-fg2">title</span>
+            <span className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-fg2">title</span>
             <input
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -72,7 +72,7 @@ export default function NewProjectModal({
           </label>
 
           <label className="mt-4 block">
-            <span className="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-fg2">brief</span>
+            <span className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-fg2">brief</span>
             <textarea
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}

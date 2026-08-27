@@ -61,7 +61,7 @@ export default function CtaFooter() {
               Your product, <em>assembled.</em>
             </h2>
             <p className="mx-auto mt-7 max-w-md text-sm font-light leading-[1.95] text-fg2">
-              One brief in. PRD, market research, architecture, code and QA out — with your name on
+              One brief in. PRD, market research, architecture, code and QA out, with your name on
               every approval.
             </p>
 
@@ -74,7 +74,7 @@ export default function CtaFooter() {
 
               {done ? (
                 <p className="rounded-full border border-mint/35 bg-mint/10 px-6 py-3.5 font-mono text-[0.7rem] tracking-[0.06em] text-mint">
-                  you're on the list — first dispatch lands in your inbox soon
+                  you're on the list, first dispatch lands in your inbox soon
                 </p>
               ) : (
                 <form
@@ -95,9 +95,6 @@ export default function CtaFooter() {
                   </button>
                 </form>
               )}
-              <p className="mt-5 font-mono text-[0.58rem] uppercase tracking-[0.16em] text-fg3">
-                product updates & agent dispatches · no spam · unsubscribe anytime
-              </p>
             </div>
           </Reveal>
         </div>
@@ -109,8 +106,8 @@ export default function CtaFooter() {
           {/* Brand */}
           <div>
             <Logo />
-            <p className="mt-4 max-w-56 text-[0.78rem] font-light leading-[1.8] text-fg3">
-              A multi-agent software pipeline. Describe it, approve it, ship it — without writing
+            <p className="mt-4 max-w-56 text-[0.85rem] font-bold leading-[1.8] text-fg3">
+              A multi-agent software pipeline. Describe it, approve it, ship it, without writing
               the boring parts.
             </p>
             <a
@@ -127,7 +124,7 @@ export default function CtaFooter() {
           {/* Link columns */}
           {FOOTER_COLS.map((col) => (
             <div key={col.title}>
-              <h4 className="font-mono text-[0.6rem] uppercase tracking-[0.22em] text-fg3">
+              <h4 className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-fg3">
                 {col.title}
               </h4>
               <ul className="mt-5 flex flex-col gap-3">
@@ -149,8 +146,8 @@ export default function CtaFooter() {
         {/* Bottom bar */}
         <div className="border-t border-line">
           <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-6">
-            <p className="font-mono text-[0.6rem] text-fg3">© 2026 ShipGen. All rights reserved.</p>
-            <p className="flex items-center gap-2.5 font-mono text-[0.6rem] text-fg3">
+            <p className="text-[0.7rem] font-bold text-fg3">© 2026 ShipGen. All rights reserved.</p>
+            <p className="flex items-center gap-2.5 font-mono text-[0.7rem] text-fg3">
               <span className="pulse-dot" />
               All agents operational
             </p>

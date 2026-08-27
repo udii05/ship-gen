@@ -122,7 +122,7 @@ function AppNav({ children }: { children: ReactNode }) {
       <main className="relative z-10 mx-auto max-w-6xl px-6 py-12">{children}</main>
 
       <footer className="relative z-10 mx-auto max-w-6xl px-6 pb-10">
-        <p className="text-center font-mono text-[0.6rem] uppercase tracking-[0.14em] text-fg3">
+        <p className="text-center font-mono text-[0.68rem] uppercase tracking-[0.14em] text-fg3">
           agents draft · humans approve · nothing ships alone
         </p>
       </footer>

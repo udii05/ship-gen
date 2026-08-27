@@ -11,7 +11,7 @@ const VALUES = [
   {
     icon: "◈",
     title: "You approve the design",
-    body: "Architecture and UX land on your desk before a single file is generated. Change direction here — it costs nothing yet.",
+    body: "Architecture and UX land on your desk before a single file is generated. Change direction here, it costs nothing yet.",
   },
   {
     icon: "⟁",
@@ -21,7 +21,7 @@ const VALUES = [
   {
     icon: "⊞",
     title: "Agents never ship alone",
-    body: "Every loop is closed by a human. Agents draft, recommend and build — decisions stay yours.",
+    body: "Every loop is closed by a human. Agents draft, recommend and build. Decisions stay yours.",
   },
 ];
 
@@ -38,7 +38,7 @@ export default function GatesSection() {
               Agents draft. <em>Humans decide.</em>
             </h2>
             <p className="mt-6 max-w-md text-sm font-light leading-[1.9] text-fg2">
-              This isn't an autopilot — it's a crew with a captain. The pipeline is built around{" "}
+              This isn't an autopilot, it's a crew with a captain. The pipeline is built around{" "}
               <strong className="font-medium text-fg">hard gates</strong> that only you can open.
             </p>
             <blockquote className="mt-10 max-w-md text-[0.9rem] font-medium leading-[1.8] text-fg2">

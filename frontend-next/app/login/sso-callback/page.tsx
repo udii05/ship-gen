@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { AuthenticateWithRedirectCallback } from "@clerk/nextjs";
 
-export const metadata: Metadata = { title: "Signing you in — ShipGen" };
+export const metadata: Metadata = { title: "Signing you in · ShipGen" };
 
 export default function SSOCallbackPage() {
   return (

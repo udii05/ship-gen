@@ -14,9 +14,9 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "ShipGen — Multi-Agent Software Pipeline",
+  title: "ShipGen · Multi-Agent Software Pipeline",
   description:
-    "Describe a product. A team of AI agents plans, researches, designs, builds and QA-checks it — while you approve every gate.",
+    "Describe a product. A team of AI agents plans, researches, designs, builds and QA-checks it, while you approve every gate.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

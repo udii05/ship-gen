@@ -143,7 +143,7 @@ export default function DashboardMockup() {
           {/* Pipeline strip for the active project */}
           <div className="mt-4 rounded-md border border-line bg-surface px-4 py-3">
             <p className="font-mono text-[0.55rem] uppercase tracking-[0.16em] text-fg3">
-              InvoicePilot — pipeline
+              InvoicePilot pipeline
             </p>
             <div className="mt-2.5 flex items-center gap-1 overflow-hidden">
               {["Planner", "Researcher", "Architect", "Builder", "QA"].map((s, i) => (

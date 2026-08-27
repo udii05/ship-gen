@@ -1,5 +1,5 @@
 const ITEMS = [
-  { tag: "PLANNER", text: "drafted PRD — InvoicePilot" },
+  { tag: "PLANNER", text: "drafted PRD for InvoicePilot" },
   { tag: "HUMAN", text: "approved prd gate" },
   { tag: "RESEARCHER", text: "scanned 6 competitors" },
   { tag: "ARCHITECT", text: "shipped design spec" },
@@ -14,7 +14,7 @@ export default function Ticker() {
     ITEMS.map((item, i) => (
       <span
         key={`${keyPrefix}-${i}`}
-        className="ticker-item inline-flex items-center gap-2 font-mono text-[0.68rem] text-fg2"
+        className="ticker-item inline-flex items-center gap-2 font-mono text-[0.72rem] text-fg2"
       >
         <span className="text-ember">◈</span>
         <span className="font-semibold tracking-[0.08em] text-fg">{item.tag}</span>

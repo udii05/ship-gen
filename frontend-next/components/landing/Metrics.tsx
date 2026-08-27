@@ -71,7 +71,7 @@ export default function Metrics() {
                   {m.target !== null ? <CountUp target={m.target} started={started} /> : m.display}
                   <span className="ml-1 font-mono text-xs text-ember">{m.unit}</span>
                 </span>
-                <span className="mt-4 block font-mono text-[0.6rem] uppercase tracking-[0.16em] text-fg2">
+                <span className="mt-4 block font-mono text-[0.7rem] uppercase tracking-[0.16em] text-fg2">
                   {m.label}
                 </span>
                 <span className="mt-1.5 block text-[0.65rem] font-bold leading-relaxed text-fg3">

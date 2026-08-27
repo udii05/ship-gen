@@ -40,7 +40,7 @@ const STAGES: Stage[] = [
   {
     num: "04",
     name: "Builder",
-    desc: "Generates the working product from the approved design — real files, real code.",
+    desc: "Generates the working product from the approved design: real files, real code.",
     artifact: "codebase",
     icon: Hammer,
   },
@@ -63,7 +63,7 @@ export default function PipelineSection() {
             Five agents. <em>One assembly line.</em>
           </h2>
           <p className="mt-5 max-w-md text-[0.78rem] font-bold leading-relaxed text-fg3">
-            each stage hands a typed artifact to the next — nothing skips a step
+            each stage hands a typed artifact to the next, nothing skips a step
           </p>
         </Reveal>
 
@@ -86,7 +86,7 @@ export default function PipelineSection() {
                       <Icon className="size-5" />
                     </span>
 
-                    <span className="mt-4 font-mono text-[0.58rem] tracking-[0.22em] text-fg3 transition group-hover:text-ember">
+                    <span className="mt-4 font-mono text-[0.68rem] tracking-[0.22em] text-fg3 transition group-hover:text-ember">
                       STAGE {s.num}
                     </span>
                     <h3 className="mt-2 font-display text-[1.05rem] font-semibold tracking-tight text-fg">
@@ -97,8 +97,8 @@ export default function PipelineSection() {
                     </p>
 
                     <div className="mt-4 flex flex-wrap justify-center gap-1.5">
-                      <span className="chip !py-0.5 text-[0.56rem]">→ {s.artifact}</span>
-                      {s.gated && <span className="chip ember !py-0.5 text-[0.56rem]">human gate</span>}
+                      <span className="chip !py-0.5 text-[0.65rem]">→ {s.artifact}</span>
+                      {s.gated && <span className="chip ember !py-0.5 text-[0.65rem]">human gate</span>}
                     </div>
                   </div>
                 </Reveal>

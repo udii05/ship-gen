@@ -30,7 +30,7 @@ const ROW_B: Quote[] = [
   {
     name: "Tom Bridger",
     role: "Staff Engineer, Logistics",
-    text: "One paragraph in — PRD, architecture and a working build out. The token meter keeps the crew honest.",
+    text: "One paragraph in, and PRD, architecture and a working build are out. The token meter keeps the crew honest.",
   },
   {
     name: "Lena Fischer",
@@ -60,7 +60,7 @@ function Card({ q }: { q: Quote }) {
         </span>
         <span className="min-w-0">
           <span className="block truncate font-display text-[0.8rem] font-semibold text-fg">{q.name}</span>
-          <span className="block truncate font-mono text-[0.56rem] uppercase tracking-[0.1em] text-fg3">
+          <span className="block truncate font-mono text-[0.65rem] uppercase tracking-[0.1em] text-fg3">
             {q.role}
           </span>
         </span>

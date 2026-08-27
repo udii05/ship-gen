@@ -68,7 +68,7 @@ export function useApi() {
       } catch {
         throw new ApiError(
           0,
-          `Cannot reach the API at ${API_URL}. The backend may be waking up (free tier sleeps when idle) — retry in a moment.`,
+          `Cannot reach the API at ${API_URL}. The backend may be waking up (free tier sleeps when idle), retry in a moment.`,
         );
       }
 

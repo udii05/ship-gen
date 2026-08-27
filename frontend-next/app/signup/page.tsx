@@ -3,7 +3,7 @@ import { SignUp } from "@clerk/nextjs";
 import { clerkEnabled, clerkTheme } from "@/lib/clerkConfig";
 import { AuthShell, ClerkSetupNotice } from "@/components/AuthShell";
 
-export const metadata: Metadata = { title: "Create account — ShipGen" };
+export const metadata: Metadata = { title: "Create account · ShipGen" };
 
 export default function SignupPage() {
   if (!clerkEnabled) {
