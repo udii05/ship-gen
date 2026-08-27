@@ -39,6 +39,19 @@ def _finish_step(db: Session, step: RunStep, detail: str, tin: int, tout: int):
     db.commit()
 
 
+def _fail_step(db: Session, step: RunStep, run: AgentRun, err: Exception):
+    """Mark the step + run as failed so the UI shows the real error instead of spinning forever."""
+    msg = str(err) or type(err).__name__
+    if len(msg) > 280:
+        msg = msg[:280] + "..."
+    step.status = "failed"
+    step.detail = msg
+    step.updated_at = _now()
+    run.status = "failed"
+    run.phase = "failed"
+    db.commit()
+
+
 def _ensure_approval(db: Session, project: Project, gate: str):
     existing = db.query(Approval).filter(Approval.project_id == project.id,
                                          Approval.gate == gate).first()
@@ -71,7 +84,11 @@ async def run_pipeline(project_id: int):
         # ---- GATE 1: PRD ----
         if not project.prd:
             step = _add_step(db, run, "requirement")
-            prd, tin, tout = await requirement_agent(user, project.prompt)
+            try:
+                prd, tin, tout = await requirement_agent(user, project.prompt)
+            except Exception as e:  # noqa: BLE001
+                _fail_step(db, step, run, e)
+                return
             project.prd = prd
             project.status = "in_progress"
             project.current_phase = "prd_review"
@@ -88,13 +105,21 @@ async def run_pipeline(project_id: int):
         # ---- Research + Design ----
         if not project.design:
             step = _add_step(db, run, "competitor")
-            snippets = await web_search(project.prompt)
-            comp, tin, tout = await competitor_agent(user, project.prd, snippets)
+            try:
+                snippets = await web_search(project.prompt)
+                comp, tin, tout = await competitor_agent(user, project.prd, snippets)
+            except Exception as e:  # noqa: BLE001
+                _fail_step(db, step, run, e)
+                return
             project.competitive_analysis = comp
             _finish_step(db, step, "Competitive analysis done", tin, tout)
 
             step = _add_step(db, run, "designer")
-            design, tin2, tout2 = await designer_agent(user, project.prd, comp)
+            try:
+                design, tin2, tout2 = await designer_agent(user, project.prd, comp)
+            except Exception as e:  # noqa: BLE001
+                _fail_step(db, step, run, e)
+                return
             project.design = design
             project.architecture = design
             project.current_phase = "design_review"
@@ -111,7 +136,11 @@ async def run_pipeline(project_id: int):
         # ---- Build (saved to account, NOT deployed) ----
         if not project.repo_path:
             step = _add_step(db, run, "builder")
-            summary = await build_product(user, project, project.design)
+            try:
+                summary = await build_product(user, project, project.design)
+            except Exception as e:  # noqa: BLE001
+                _fail_step(db, step, run, e)
+                return
             project.code_summary = summary
             project.status = "ready"
             project.current_phase = "done"

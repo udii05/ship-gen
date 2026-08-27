@@ -43,4 +43,5 @@ app.include_router(deploy.router)
 @app.get("/health")
 def health():
     return {"status": "ok", "default_provider": settings.default_model_provider,
-            "default_model": settings.default_model_name}
+            "default_model": settings.default_model_name,
+            "gemini_key_set": bool(settings.gemini_api_key)}

@@ -51,6 +51,7 @@ export default function ProjectDetailPage() {
   const [busy, setBusy] = useState(false);
   const [tab, setTab] = useState("");
   const [vercelToken, setVercelToken] = useState("");
+  const [justStarted, setJustStarted] = useState(false);
 
   const load = useCallback(async () => {
     try {
@@ -75,14 +76,16 @@ export default function ProjectDetailPage() {
     void load();
   }, [load]);
 
-  // Poll while the pipeline (or a deploy) is in flight.
+  // Poll while the pipeline (or a deploy) is in flight. `justStarted` keeps polling
+  // alive right after "start" until the background run appears in the DB.
   const active = useMemo(() => {
     if (!project) return false;
     if (project.status === "in_progress") return true;
     if (run && (run.status === "running" || run.status === "queued")) return true;
     if (project.deploy_status === "requested") return true;
+    if (justStarted) return true;
     return false;
-  }, [project, run]);
+  }, [project, run, justStarted]);
 
   useEffect(() => {
     if (!active) return;
@@ -127,6 +130,8 @@ export default function ProjectDetailPage() {
     try {
       await api(`/projects/${projectId}/start`, { body: {} });
       setNotice("Pipeline started, the Planner is drafting your PRD.");
+      setJustStarted(true);
+      setTimeout(() => setJustStarted(false), 90000);
       await load();
     } catch (err) {
       setError(err instanceof ApiError ? err.message : "Failed to start pipeline.");
