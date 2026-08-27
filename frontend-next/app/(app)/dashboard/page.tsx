@@ -6,7 +6,7 @@ import { useApi, ApiError } from "@/lib/api";
 import type { Project } from "@/lib/types";
 import StatusPill from "@/components/StatusPill";
 import NewProjectModal from "@/components/NewProjectModal";
-import { ChevronRight, Clock, Folder, Plus, Refresh, Spinner } from "@/components/icons";
+import { ChevronRight, Clock, Folder, Plus, Refresh, Spinner, Trash } from "@/components/icons";
 
 function formatDate(iso: string): string {
   if (!iso) return "";
@@ -42,6 +42,7 @@ export default function DashboardPage() {
   const [projects, setProjects] = useState<Project[] | null>(null);
   const [error, setError] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
+  const [deletingId, setDeletingId] = useState(-1);
 
   const load = useCallback(async () => {
     try {
@@ -56,6 +57,26 @@ export default function DashboardPage() {
   useEffect(() => {
     void load();
   }, [load]);
+
+  async function remove(p: Project) {
+    if (
+      !window.confirm(
+        `Delete "${p.title}" permanently? This removes the project, its pipeline runs and all generated files. This cannot be undone.`,
+      )
+    ) {
+      return;
+    }
+    setDeletingId(p.id);
+    setError("");
+    try {
+      await api(`/projects/${p.id}`, { method: "DELETE" });
+      setProjects((prev) => (prev ? prev.filter((x) => x.id !== p.id) : prev));
+    } catch (err) {
+      setError(err instanceof ApiError ? err.message : "Failed to delete project.");
+    } finally {
+      setDeletingId(-1);
+    }
+  }
 
   return (
     <div>
@@ -114,14 +135,33 @@ export default function DashboardPage() {
       ) : (
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((p) => (
-            <button
+            <div
               key={p.id}
+              role="button"
+              tabIndex={0}
               onClick={() => router.push(`/projects/${p.id}`)}
-              className="card card-hover group flex flex-col p-5 text-left transition duration-200 hover:-translate-y-1"
+              onKeyDown={(e) => {
+                if (e.key === "Enter") router.push(`/projects/${p.id}`);
+              }}
+              className="card card-hover group flex cursor-pointer flex-col p-5 text-left transition duration-200 hover:-translate-y-1"
             >
               <div className="flex items-start justify-between gap-3">
                 <h3 className="min-w-0 truncate font-display text-sm font-bold text-fg">{p.title}</h3>
-                <StatusPill status={p.status === "ready" && p.deploy_status === "done" ? "deployed" : p.status} />
+                <span className="flex shrink-0 items-center gap-1.5">
+                  <StatusPill status={p.status === "ready" && p.deploy_status === "done" ? "deployed" : p.status} />
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      void remove(p);
+                    }}
+                    disabled={deletingId === p.id}
+                    aria-label={`Delete ${p.title}`}
+                    title="Delete project"
+                    className="rounded-sm p-1 text-fg3 transition hover:bg-danger/10 hover:text-danger"
+                  >
+                    {deletingId === p.id ? <Spinner className="size-3.5" /> : <Trash className="size-3.5" />}
+                  </button>
+                </span>
               </div>
               <p className="mt-2.5 line-clamp-2 flex-1 text-xs font-light leading-relaxed text-fg2">{p.prompt}</p>
               <div className="mt-4 flex items-center justify-between border-t border-line pt-3 font-mono text-[0.68rem] text-fg3">
@@ -136,7 +176,7 @@ export default function DashboardPage() {
                   </span>
                 </span>
               </div>
-            </button>
+            </div>
           ))}
         </div>
       )}

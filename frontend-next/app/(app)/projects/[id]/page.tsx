@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useApi, ApiError } from "@/lib/api";
 import type { Approval, Project, Run } from "@/lib/types";
 import Pipeline from "@/components/Pipeline";
@@ -22,6 +22,7 @@ import {
   Rocket,
   ShieldCheck,
   Spinner,
+  Trash,
   Zap,
 } from "@/components/icons";
 
@@ -42,6 +43,7 @@ function formatDate(iso: string): string {
 export default function ProjectDetailPage() {
   const params = useParams<{ id: string }>();
   const projectId = Number(params.id);
+  const router = useRouter();
   const api = useApi();
 
   const [project, setProject] = useState<Project | null>(null);
@@ -53,6 +55,7 @@ export default function ProjectDetailPage() {
   const [tab, setTab] = useState("");
   const [vercelToken, setVercelToken] = useState("");
   const [justStarted, setJustStarted] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   const load = useCallback(async () => {
     try {
@@ -119,6 +122,25 @@ export default function ProjectDetailPage() {
     if (!pending) return null;
     return project.current_phase === `${pending.gate}_review` ? pending.gate : null;
   }, [approvals, project]);
+
+  async function deleteProject() {
+    if (!project) return;
+    if (
+      !window.confirm(
+        `Delete "${project.title}" permanently? This removes the project, its pipeline runs and all generated files. This cannot be undone.`,
+      )
+    ) {
+      return;
+    }
+    setDeleting(true);
+    try {
+      await api(`/projects/${projectId}`, { method: "DELETE" });
+      router.push("/dashboard");
+    } catch (err) {
+      setError(err instanceof ApiError ? err.message : "Failed to delete project.");
+      setDeleting(false);
+    }
+  }
 
   async function startPipeline() {
     setBusy(true);
@@ -225,29 +247,40 @@ export default function ProjectDetailPage() {
           </p>
         </div>
 
-        {(() => {
-          const stepRunning = run?.steps.some((s) => s.status === "running") ?? false;
-          const pipelineDone = project.status === "ready" || project.current_phase === "done";
-          if (stepRunning || pipelineDone) return null;
-          const label =
-            run?.status === "failed"
-              ? "retry pipeline"
-              : project.status === "draft"
-                ? "start pipeline"
-                : "resume pipeline";
-          return (
-            <button onClick={() => void startPipeline()} disabled={busy} className="btn btn-primary">
-              {busy ? (
-                <Spinner className="size-4" />
-              ) : run?.status === "failed" || project.status !== "draft" ? (
-                <Refresh className="size-4" />
-              ) : (
-                <Play className="size-4" />
-              )}
-              {label}
-            </button>
-          );
-        })()}
+        <div className="flex items-center gap-2">
+          {(() => {
+            const stepRunning = run?.steps.some((s) => s.status === "running") ?? false;
+            const pipelineDone = project.status === "ready" || project.current_phase === "done";
+            if (stepRunning || pipelineDone) return null;
+            const label =
+              run?.status === "failed"
+                ? "retry pipeline"
+                : project.status === "draft"
+                  ? "start pipeline"
+                  : "resume pipeline";
+            return (
+              <button onClick={() => void startPipeline()} disabled={busy} className="btn btn-primary">
+                {busy ? (
+                  <Spinner className="size-4" />
+                ) : run?.status === "failed" || project.status !== "draft" ? (
+                  <Refresh className="size-4" />
+                ) : (
+                  <Play className="size-4" />
+                )}
+                {label}
+              </button>
+            );
+          })()}
+          <button
+            onClick={() => void deleteProject()}
+            disabled={deleting}
+            title="Delete project"
+            className="btn btn-ghost !text-danger hover:!bg-danger/10"
+          >
+            {deleting ? <Spinner className="size-4" /> : <Trash className="size-4" />}
+            delete
+          </button>
+        </div>
       </div>
 
       {/* Brief */}

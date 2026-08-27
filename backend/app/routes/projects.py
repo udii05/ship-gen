@@ -1,6 +1,7 @@
 import io
 import os
 import re
+import shutil
 import zipfile
 from datetime import datetime, timezone
 from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Response
@@ -144,6 +145,25 @@ def get_run(project_id: int, user: User = Depends(get_current_user),
     steps = [StepOut(agent=s.agent, status=s.status, detail=s.detail,
                      tokens_in=s.tokens_in, tokens_out=s.tokens_out) for s in run.steps]
     return RunOut(id=run.id, status=run.status, phase=run.phase, steps=steps)
+
+
+@router.delete("/{project_id}")
+def delete_project(project_id: int, user: User = Depends(get_current_user),
+                   db: Session = Depends(get_db)):
+    """Permanently delete a project: DB rows (runs, steps, approvals cascade),
+    generated workspace files. No trace remains."""
+    p = db.get(Project, project_id)
+    if not p or p.user_id != user.id:
+        raise HTTPException(status_code=404, detail="Project not found")
+    # Remove generated files from the workspace (path-guarded, best-effort).
+    if p.repo_path:
+        root = os.path.abspath(p.repo_path)
+        workspace = os.path.abspath(settings.workspace_root)
+        if root.startswith(workspace) and os.path.isdir(root):
+            shutil.rmtree(root, ignore_errors=True)
+    db.delete(p)  # cascades to runs -> steps and approvals
+    db.commit()
+    return {"status": "deleted", "project_id": project_id}
 
 
 @router.get("/{project_id}/preview")
