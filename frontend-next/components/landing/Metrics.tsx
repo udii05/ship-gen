@@ -74,7 +74,7 @@ export default function Metrics() {
                 <span className="mt-4 block font-mono text-[0.6rem] uppercase tracking-[0.16em] text-fg2">
                   {m.label}
                 </span>
-                <span className="mt-1.5 block font-mono text-[0.55rem] leading-relaxed text-fg3">
+                <span className="mt-1.5 block text-[0.65rem] font-bold leading-relaxed text-fg3">
                   {m.sub}
                 </span>
               </div>

@@ -62,7 +62,7 @@ export default function PipelineSection() {
           <h2 className="heading-lux text-4xl sm:text-5xl">
             Five agents. <em>One assembly line.</em>
           </h2>
-          <p className="mt-5 max-w-md font-mono text-[0.65rem] leading-relaxed text-fg3">
+          <p className="mt-5 max-w-md text-[0.78rem] font-bold leading-relaxed text-fg3">
             each stage hands a typed artifact to the next — nothing skips a step
           </p>
         </Reveal>

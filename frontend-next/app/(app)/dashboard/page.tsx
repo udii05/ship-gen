@@ -64,7 +64,7 @@ export default function DashboardPage() {
           <h1 className="heading-lux text-4xl sm:text-5xl">
             Your <em>projects</em>
           </h1>
-          <p className="mt-4 font-mono text-[0.65rem] leading-relaxed text-fg3">
+          <p className="mt-4 text-[0.78rem] font-bold leading-relaxed text-fg3">
             make your product and ship it instantly
           </p>
         </div>

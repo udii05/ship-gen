@@ -60,7 +60,7 @@ export default function PricingSection() {
           <h2 className="heading-lux text-4xl sm:text-5xl">
             Pay for the line, <em>not the tokens.</em>
           </h2>
-          <p className="mt-5 max-w-md font-mono text-[0.65rem] leading-relaxed text-fg3">
+          <p className="mt-5 max-w-md text-[0.78rem] font-bold leading-relaxed text-fg3">
             bring your own model keys — we never mark up inference
           </p>
         </Reveal>
