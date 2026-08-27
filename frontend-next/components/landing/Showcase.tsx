@@ -13,7 +13,7 @@ export default function Showcase() {
           <h2 className="heading-lux text-4xl sm:text-5xl">
             One brief in. <em>A full run on the line.</em>
           </h2>
-          <p className="mt-5 max-w-md font-mono text-[0.65rem] leading-relaxed text-fg3">
+          <p className="mt-5 max-w-md text-[0.78rem] font-bold leading-relaxed text-fg3">
             every stage reports back with an artifact — and stops at your gates
           </p>
         </Reveal>
