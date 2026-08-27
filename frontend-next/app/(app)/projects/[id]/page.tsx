@@ -119,11 +119,6 @@ export default function ProjectDetailPage() {
     return project.current_phase === `${pending.gate}_review` ? pending.gate : null;
   }, [approvals, project]);
 
-  const totalTokens = useMemo(() => {
-    if (!run) return 0;
-    return run.steps.reduce((sum, s) => sum + s.tokens_in + s.tokens_out, 0);
-  }, [run]);
-
   async function startPipeline() {
     setBusy(true);
     setNotice("");
@@ -225,27 +220,32 @@ export default function ProjectDetailPage() {
                 </span>
               </>
             )}
-            {totalTokens > 0 && (
-              <>
-                <span className="text-line2">|</span>
-                <span>{totalTokens.toLocaleString()} tokens used</span>
-              </>
-            )}
           </p>
         </div>
 
-        {(project.status === "draft" || run?.status === "failed") && (
-          <button onClick={() => void startPipeline()} disabled={busy} className="btn btn-primary">
-            {busy ? (
-              <Spinner className="size-4" />
-            ) : run?.status === "failed" ? (
-              <Refresh className="size-4" />
-            ) : (
-              <Play className="size-4" />
-            )}
-            {run?.status === "failed" ? "retry pipeline" : "start pipeline"}
-          </button>
-        )}
+        {(() => {
+          const stepRunning = run?.steps.some((s) => s.status === "running") ?? false;
+          const pipelineDone = project.status === "ready" || project.current_phase === "done";
+          if (stepRunning || pipelineDone) return null;
+          const label =
+            run?.status === "failed"
+              ? "retry pipeline"
+              : project.status === "draft"
+                ? "start pipeline"
+                : "resume pipeline";
+          return (
+            <button onClick={() => void startPipeline()} disabled={busy} className="btn btn-primary">
+              {busy ? (
+                <Spinner className="size-4" />
+              ) : run?.status === "failed" || project.status !== "draft" ? (
+                <Refresh className="size-4" />
+              ) : (
+                <Play className="size-4" />
+              )}
+              {label}
+            </button>
+          );
+        })()}
       </div>
 
       {/* Brief */}

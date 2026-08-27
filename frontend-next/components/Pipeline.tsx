@@ -40,7 +40,6 @@ export default function Pipeline({ run }: { run: Run | null }) {
         const step = latestStep(run, agent.key);
         const status = step?.status ?? "pending";
         const Icon = agent.icon;
-        const tokens = (step?.tokens_in ?? 0) + (step?.tokens_out ?? 0);
 
         const nodeCls =
           status === "done"
@@ -90,11 +89,6 @@ export default function Pipeline({ run }: { run: Run | null }) {
                 {status === "running" && (
                   <span className="font-mono text-[0.58rem] uppercase tracking-[0.18em] text-ember/80">
                     working…
-                  </span>
-                )}
-                {tokens > 0 && (
-                  <span className="rounded-sm border border-line2 bg-ink px-1.5 py-0.5 font-mono text-[0.55rem] text-fg3">
-                    {step?.tokens_in ?? 0} in · {step?.tokens_out ?? 0} out tok
                   </span>
                 )}
               </div>
