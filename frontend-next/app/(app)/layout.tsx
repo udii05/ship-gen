@@ -3,14 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
-import { SignedIn, UserButton, useUser } from "@clerk/nextjs";
+import { UserButton, useUser } from "@clerk/nextjs";
 import { clerkEnabled } from "@/lib/clerkConfig";
 import { ClerkSetupNotice } from "@/components/AuthShell";
 import Logo from "@/components/Logo";
 
 function AppNav({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  const { user } = useUser();
+  const { user, isSignedIn } = useUser();
   const email = user?.primaryEmailAddress?.emailAddress;
 
   const navLink = (href: string, label: string) => {
@@ -42,7 +42,7 @@ function AppNav({ children }: { children: ReactNode }) {
             <span className="hidden max-w-48 truncate font-mono text-[0.62rem] text-fg3 lg:inline" title={email}>
               {email}
             </span>
-            <SignedIn>
+            {isSignedIn && (
               <UserButton
                 appearance={{
                   elements: {
@@ -50,7 +50,7 @@ function AppNav({ children }: { children: ReactNode }) {
                   },
                 }}
               />
-            </SignedIn>
+            )}
           </nav>
         </div>
       </header>
