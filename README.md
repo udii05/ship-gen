@@ -9,6 +9,10 @@
 </p>
 
 <p align="center">
+  <strong>Demo Video Link:</strong> <a href="https://tinyurl.com/yxr3dtnw">tinyurl.com/yxr3dtnw</a>
+</p>
+
+<p align="center">
   <em>Describe a product. A crew of specialized AI agents plans, researches, designs, builds and QA-checks it — pausing at every gate for your approval.</em>
 </p>
 
