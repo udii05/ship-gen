@@ -1,19 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useAuth } from "@clerk/nextjs";
-import { clerkEnabled } from "@/lib/clerkConfig";
 import Logo from "@/components/Logo";
-
-function SignedInNav() {
-  const { isSignedIn } = useAuth();
-  if (!isSignedIn) return null;
-  return (
-    <Link href="/dashboard" className="btn btn-primary">
-      Open dashboard →
-    </Link>
-  );
-}
 
 export default function LandingNav() {
   return (
@@ -41,11 +29,7 @@ export default function LandingNav() {
           </a>
         </div>
 
-        <div className="flex items-center gap-3">
-          {clerkEnabled ? (
-            <SignedInNav />
-          ) : null}
-        </div>
+        <div className="flex items-center gap-3" />
       </nav>
     </header>
   );
