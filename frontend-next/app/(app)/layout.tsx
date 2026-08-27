@@ -28,7 +28,8 @@ function AppNav({ children }: { children: ReactNode }) {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="relative min-h-screen overflow-hidden">
+      <div className="ember-glow -top-72 left-1/2 -translate-x-1/2" />
       <header className="sticky top-0 z-40 border-b border-line bg-ink/85 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
           <Link href="/dashboard" aria-label="ShipGen dashboard">
@@ -55,9 +56,9 @@ function AppNav({ children }: { children: ReactNode }) {
         </div>
       </header>
 
-      <main className="mx-auto max-w-6xl px-6 py-12">{children}</main>
+      <main className="relative z-10 mx-auto max-w-6xl px-6 py-12">{children}</main>
 
-      <footer className="mx-auto max-w-6xl px-6 pb-10">
+      <footer className="relative z-10 mx-auto max-w-6xl px-6 pb-10">
         <p className="text-center font-mono text-[0.6rem] uppercase tracking-[0.14em] text-fg3">
           agents draft · humans approve · nothing ships alone
         </p>

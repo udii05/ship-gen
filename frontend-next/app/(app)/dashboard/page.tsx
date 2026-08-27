@@ -16,6 +16,26 @@ function formatDate(iso: string): string {
     : d.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
 }
 
+/** Mini stage-progress dots, same as the landing page mockup. */
+function StageDots({ status }: { status: string }) {
+  const done =
+    status === "ready" || status === "deployed" ? 5 : status === "in_progress" ? 2 : 0;
+  return (
+    <span className="flex items-center gap-1.5">
+      {Array.from({ length: 5 }).map((_, i) => (
+        <span
+          key={i}
+          className={
+            i < done
+              ? "size-1.5 rounded-full bg-mint"
+              : "size-1.5 rounded-full bg-white/12"
+          }
+        />
+      ))}
+    </span>
+  );
+}
+
 export default function DashboardPage() {
   const router = useRouter();
   const api = useApi();
@@ -42,8 +62,10 @@ export default function DashboardPage() {
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <div className="sec-label !mb-2">// your products</div>
-          <h1 className="font-display text-2xl font-bold tracking-tight text-fg">Your projects</h1>
-          <p className="mt-1.5 font-mono text-[0.65rem] leading-relaxed text-fg3">
+          <h1 className="heading-lux text-4xl sm:text-5xl">
+            Your <em>projects</em>
+          </h1>
+          <p className="mt-4 font-mono text-[0.65rem] leading-relaxed text-fg3">
             each project runs planner → researcher → architect → builder → qa, gated by your approvals
           </p>
         </div>
@@ -83,7 +105,7 @@ export default function DashboardPage() {
             <button
               key={p.id}
               onClick={() => router.push(`/projects/${p.id}`)}
-              className="card card-hover group flex flex-col p-5 text-left"
+              className="card card-hover group flex flex-col p-5 text-left transition duration-200 hover:-translate-y-1"
             >
               <div className="flex items-start justify-between gap-3">
                 <h3 className="min-w-0 truncate font-display text-sm font-bold text-fg">{p.title}</h3>
@@ -95,8 +117,11 @@ export default function DashboardPage() {
                   <Clock className="size-3" />
                   {formatDate(p.created_at)}
                 </span>
-                <span className="flex items-center gap-1 text-ember-bright transition-all group-hover:gap-2">
-                  open <ChevronRight className="size-3" />
+                <span className="flex items-center gap-2">
+                  <StageDots status={p.status} />
+                  <span className="flex items-center gap-1 text-ember-bright transition-all group-hover:gap-2">
+                    open <ChevronRight className="size-3" />
+                  </span>
                 </span>
               </div>
             </button>

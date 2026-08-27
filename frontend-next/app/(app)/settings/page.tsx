@@ -52,8 +52,10 @@ export default function SettingsPage() {
   return (
     <div className="mx-auto max-w-2xl">
       <div className="sec-label !mb-2">// settings</div>
-      <h1 className="font-display text-2xl font-bold tracking-tight text-fg">Model configuration</h1>
-      <p className="mt-1.5 font-mono text-[0.65rem] text-fg3">
+      <h1 className="heading-lux text-3xl sm:text-4xl">
+        Model <em>configuration</em>
+      </h1>
+      <p className="mt-4 font-mono text-[0.65rem] text-fg3">
         signed in as <span className="text-fg2">{email}</span>
       </p>
 

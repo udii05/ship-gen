@@ -205,7 +205,7 @@ export default function ProjectDetailPage() {
       <div className="mt-4 flex flex-wrap items-start justify-between gap-4">
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-3">
-            <h1 className="max-w-xl truncate font-display text-2xl font-bold tracking-tight text-fg">
+            <h1 className="heading-lux max-w-xl truncate text-3xl sm:text-4xl">
               {project.title}
             </h1>
             <StatusPill status={project.status === "ready" && deployDone ? "deployed" : project.status} />
